@@ -1,6 +1,6 @@
 {
   "name": "wasm-metering",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "injects metering into webassembly binaries",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "license": "MPL-2.0",
   "dependencies": {
     "leb128": "^0.0.4",
-    "wasm-json-toolkit": "0.3.0"
+    "wasm-json-toolkit": "permaweb/wasm-json-toolkit#v0.2.8"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
