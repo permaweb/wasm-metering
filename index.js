@@ -1,10 +1,10 @@
-const toolkit = require('wasm-json-toolkit')
+const toolkit = require('@permaweb/wasm-json-toolkit')
 const text2json = toolkit.text2json
-const SECTION_IDS = require('wasm-json-toolkit/json2wasm').SECTION_IDS
+const SECTION_IDS = require('@permaweb/wasm-json-toolkit/json2wasm').SECTION_IDS
 const defaultCostTable = require('./defaultCostTable.json')
 
 // gets the cost of an operation for entry in a section from the cost table
-function getCost (json, costTable = {}, defaultCost = 0) {
+function getCost(json, costTable = {}, defaultCost = 0) {
   let cost = 0
   // finds the default cost
   defaultCost = costTable['DEFAULT'] !== undefined ? costTable['DEFAULT'] : 0
@@ -29,16 +29,16 @@ function getCost (json, costTable = {}, defaultCost = 0) {
 }
 
 // meters a single code entrie
-function meterCodeEntry (entry, costTable, meterFuncIndex, meterType, cost) {
-  function meteringStatement (cost, meteringImportIndex) {
+function meterCodeEntry(entry, costTable, meterFuncIndex, meterType, cost) {
+  function meteringStatement(cost, meteringImportIndex) {
     return text2json(`${meterType}.const ${cost} call ${meteringImportIndex}`)
   }
-  function remapOp (op, funcIndex) {
+  function remapOp(op, funcIndex) {
     if (op.name === 'call' && op.immediates >= funcIndex) {
       op.immediates = (++op.immediates).toString()
     }
   }
-  function meterTheMeteringStatement () {
+  function meterTheMeteringStatement() {
     const code = meteringStatement(0, 0)
     // sum the operations cost
     return code.reduce(
@@ -98,11 +98,11 @@ function meterCodeEntry (entry, costTable, meterFuncIndex, meterType, cost) {
  * @return {Object} the metered json
  */
 exports.meterJSON = (json, opts) => {
-  function findSection (module, sectionName) {
+  function findSection(module, sectionName) {
     return module.find(section => section.name === sectionName)
   }
 
-  function createSection (module, name) {
+  function createSection(module, name) {
     const newSectionId = SECTION_IDS[name]
     for (let index in module) {
       const section = module[index]
@@ -123,7 +123,7 @@ exports.meterJSON = (json, opts) => {
   let funcIndex = 0
   let functionModule, typeModule
 
-  let {costTable, moduleStr, fieldStr, meterType} = opts
+  let { costTable, moduleStr, fieldStr, meterType } = opts
 
   // set defaults
   if (!costTable) costTable = defaultCostTable
