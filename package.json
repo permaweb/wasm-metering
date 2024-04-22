@@ -1,5 +1,5 @@
 {
-  "name": "wasm-metering",
+  "name": "@permaweb/wasm-metering",
   "version": "0.2.2",
   "description": "injects metering into webassembly binaries",
   "main": "index.js",
@@ -18,8 +18,8 @@
   ],
   "license": "MPL-2.0",
   "dependencies": {
-    "leb128": "^0.0.4",
-    "wasm-json-toolkit": "permaweb/wasm-json-toolkit#v0.2.8"
+    "@permaweb/wasm-json-toolkit": "^0.2.9",
+    "leb128": "^0.0.4"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
@@ -34,12 +34,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ewasm/wasm-metering.git"
+    "url": "https://github.com/permaweb/wasm-metering.git"
   },
   "bugs": {
-    "url": "https://github.com/ewasm/wasm-metering/issues"
+    "url": "https://github.com/permaweb/wasm-metering/issues"
   },
-  "homepage": "https://github.com/ewasm/wasm-metering",
+  "homepage": "https://github.com/permaweb/wasm-metering",
   "standard": {
     "ignore": [
       "test/wabt"
